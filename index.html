@@ -23,9 +23,8 @@
                     .then(y => {
                         let p = document.createElement('p');
                         for(let i in y){
-                            
+                            p.textContent += "{" + i + ": " + y[i] + "}";
                         }
-                        p.textContent = "fields : " + y["fields"] + "\r\n, methods : " + y["methods"];
                         document.getElementById("resp").appendChild(p);
                     });
             }

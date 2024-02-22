@@ -103,22 +103,29 @@ public class Chat {
                 break;
             case "invoke":
                 Method m1;
+                boolean flag = false;
                 try{
-                    m1 = c.getDeclaredMethod(vals[1], String.class);
-                } catch (Exception e) {
-                    try {
-                        
-                    } catch (Exception e) {
-                        // TODO: handle exception
+                    m1 = c.getDeclaredMethod(vals[1]);
+                    ans = "{\"method\":\"" + m1.toString() + "\"}";
+                }catch (Exception f){
+                    try{
+                        m1 = c.getDeclaredMethod(vals[1], String.class);
+                        ans = "{\"method\":\"" + m1.toString() + "\"}";
+                    } catch (Exception a) {
+                        try {
+                            m1 = c.getDeclaredMethod(vals[1], Integer.TYPE);
+                            ans = "{\"method\":\"" + m1.toString() + "\"}";
+                        } catch (Exception b) {
+                            try {
+                                m1 = c.getDeclaredMethod(vals[1], Double.TYPE);
+                                ans = "{\"method\":\"" + m1.toString() + "\"}";
+                            } catch (Exception d) {
+                                flag = true;
+                                ans = "No such class defined with the parameters";
+                            }
+                        }
                     }
                 }
-                
-                try {
-                    m1 = c.getDeclaredMethod(vals[1], Integer.TYPE);
-                } try{
-                    m1 = c.getDeclaredMethod(vals[1], Double.TYPE);
-                } 
-                ans = "{\"method\":\"" + m1.toString() + "\"}";
                 break;
             case "unaryInvoke":
                 Method m2;

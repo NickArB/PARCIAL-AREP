@@ -92,7 +92,9 @@ public class Facade {
                                 "                    .then(x => x.json())\r\n" + //
                                 "                    .then(y => {\r\n" + //
                                 "                        let p = document.createElement('p');\r\n" + //
-                                "                        p.textContent = \"fields : \" + y[\"fields\"] + \", methods : \" + y[\"methods\"];\r\n" + //
+                                "                        for(let i in y){\r\n" + //
+                                "                            p.textContent += \"{\" + i + \": \" + y[i] + \"}\";\r\n" + //
+                                "                        }\r\n" + //
                                 "                        document.getElementById(\"resp\").appendChild(p);\r\n" + //
                                 "                    });\r\n" + //
                                 "            }\r\n" + //
