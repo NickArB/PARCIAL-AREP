@@ -107,9 +107,6 @@ public class Chat {
                     ans = "{\"method\":\"" + m1.toString() + "\"}";
                 }catch (Exception f){
                     try{
-                        System.out.println(vals[1]);
-                        vals[1] = vals[1].split("\"")[0];
-                        System.out.println(vals[1]);
                         m1 = c.getDeclaredMethod(vals[1], String.class);
                         ans = "{\"method\":\"" + m1.toString() + "\"}";
                     } catch (Exception a) {

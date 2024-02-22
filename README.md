@@ -22,6 +22,8 @@ http://localhost:36000/cliente
 ```
 5. Debería aparecer una interfaz de usuario desde la que debe ingresar las instrucciones deseadas *SIN ESPACIOS*
 
+* NOTA: Las consultas con tipos String no funcionan, ejemplo: unaryInvoke(java.lang.Integer, valueOf, String, "3") <-- Esto va a fallar ya que no se extrae el contenido de lo que esta entre comillas. Si se manda sin comillas si que funcionara, ejemplo: unaryInvoke(java.lang.Integer,valueOf,String,3)
+
 - Interfaz de cliente
 
 ![alt text](images/image.png)
