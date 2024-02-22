@@ -78,13 +78,13 @@ public class Chat {
     }
 
     public static String reflexCallProcedure(String query) throws ClassNotFoundException, NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
-        System.out.println(query);
         String function = query.split("\\(")[0];
         String values = query.split("\\(")[1];
         values = values.split("\\)")[0];
         String[] vals = values.split(",");
         String ans = "";
         Class<?> c = Class.forName(vals[0]);
+        System.out.println(values);
         
         switch (function) {
             case "class":
@@ -99,7 +99,6 @@ public class Chat {
                 }
                 ans = ans.substring(0, ans.length() - 1);
                 ans += "]}";
-                System.out.println(ans);
                 break;
             case "invoke":
                 Method m1;
@@ -108,6 +107,9 @@ public class Chat {
                     ans = "{\"method\":\"" + m1.toString() + "\"}";
                 }catch (Exception f){
                     try{
+                        System.out.println(vals[1]);
+                        vals[1] = vals[1].split("\"")[0];
+                        System.out.println(vals[1]);
                         m1 = c.getDeclaredMethod(vals[1], String.class);
                         ans = "{\"method\":\"" + m1.toString() + "\"}";
                     } catch (Exception a) {
@@ -127,7 +129,8 @@ public class Chat {
                 break;
             case "unaryInvoke":
                 Method m2;
-                if (vals[2].equals("string")){
+                System.out.println("Entre");
+                if (vals[2].equals("String")){
                     m2 = c.getMethod(vals[1], String.class);
                     String args = vals[3];
                     ans = "{\"answer\":\"" + m2.invoke(null, args) + "\"}";
@@ -145,7 +148,7 @@ public class Chat {
                 break;
             case "binaryInvoke":
                 Method m3;
-                if (vals[2].equals("string")){
+                if (vals[2].equals("String")){
                     m3 = c.getMethod(vals[1], String.class, String.class);
                     String arg1 = vals[3];
                     String arg2 = vals[5];
